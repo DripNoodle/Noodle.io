@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noodle Spoof - Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --primary: #ff416c;
+      --accent: #00e676;
+      --bg-dark: #181828;
+      --bg-card: rgba(255,255,255,0.07);
+      --nav-bg: rgba(20,20,30,0.88);
+      --shadow: 0 2px 32px #0006;
+      --radius-lg: 26px;
+      --radius-sm: 14px;
+      --fade: rgba(255,255,255,0.13);
+      --gradient: linear-gradient(135deg, #ff416c 0%, #00e676 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Rubik', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #f5f5f5;
+      overflow-x: hidden;
+      position: relative;
+    }
+    html { scroll-behavior: smooth; }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 20%, #ff416c55 0%, transparent 60%),
+                  radial-gradient(circle at 80% 80%, #00e67633 0%, transparent 70%),
+                  linear-gradient(120deg, #1a1a2e 0%, #16213e 100%);
+      animation: bgMove 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes bgMove {
+      0% { background-position: 20% 20%, 80% 80%; }
+      100% { background-position: 30% 10%, 70% 90%; }
+    }
+    #particles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100vw;
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0.5rem 0 0.2rem 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      border-bottom: 1.5px solid #23234a;
+      animation: fadeIn 1.2s;
+      overflow-x: auto;
+    }
+    .nav-tab {
+      color: #fff9;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      transition: color 0.23s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+      padding: 0.3em 1.6em 0.65em 1.6em;
+      border-radius: 16px 16px 0 0;
+      position: relative;
+      z-index: 3;
+      background: transparent;
+      margin-bottom: 0;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      border-bottom: 2.5px solid transparent;
+    }
+    .nav-tab.active,
+    .nav-tab:hover,
+    .nav-tab:focus-visible {
+      color: #fff;
+      background: linear-gradient(90deg, #ff416c 0%, #00e676 100%);
+      box-shadow: 0 2px 22px #ff416c33;
+      border-bottom: 2.5px solid #fff;
+      transform: translateY(-4px) scale(1.08);
+      outline: none;
+    }
+    header {
+      background: linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%);
+      text-align: center;
+      padding: 7rem 2rem 4rem 2rem;
+      box-shadow: 0 5px 32px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease-in-out;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 4.1rem;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.04em;
+      text-shadow: 0 4px 32px #ff416c88;
+      animation: slideInDown 1.2s ease-in-out;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    header p {
+      font-size: 1.5rem;
+      color: #ffecec;
+      animation: fadeIn 1.6s ease-in-out;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 12px #ff4b2b55;
+    }
+    .btn {
+      background: linear-gradient(90deg, #00e676 0%, #00bfae 100%);
+      color: #000;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 32px #00e67680, 0 2px 8px #0003;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #fff8 0%, transparent 80%);
+      opacity: 0.5;
+      transition: transform 0.3s;
+      z-index: 0;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #00c853 0%, #00bfae 100%);
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 0 48px #00e676cc, 0 4px 16px #0004;
+    }
+    .btn:active::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 6rem auto 0 auto;
+      padding: 3rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 2;
+      min-height: 420px;
+      background: none;
+    }
+    .section {
+      min-height: 100vh;
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-margin-top: 100px;
+    }
+    .info-block {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--fade);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 0 60px 0 #0007, 0 2px 16px #ff416c22;
+      backdrop-filter: blur(14px) saturate(1.1);
+      transition: all 0.25s cubic-bezier(.4,2,.6,1);
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+    .info-block h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .info-block ul {
+      margin-left: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    .info-block ul li {
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      padding-left: 0.2em;
+    }
+    .demo-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .demo-media img, .demo-media video {
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 24px #0008;
+      max-width: 80vw;
+      max-height: 60vh;
+      background: #111;
+      margin-bottom: 1em;
+      width: 100%;
+      object-fit: cover;
+      background: #0a0a17;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 1px 16px #0005;
+      padding: 1.1rem 1.2rem;
+      border: 1.2px solid var(--fade);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: transform 0.19s;
+    }
+    .feature-card:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 2px 24px #00e67633;
+    }
+    .feature-icon {
+      font-size: 2.1rem;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+    @media (max-width: 900px) {
+      nav { gap: 1rem; }
+      .container { margin-top: 4.5rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { gap: 0.2rem; font-size: 90%; }
+      .nav-tab { padding: 0.2em 0.7em 0.5em 0.7em; font-size: 1rem; }
+      .container { margin-top: 3.5rem; }
+      header h1 { font-size: 2.2rem; }
+      .section { min-height: 90vh; }
+      #requirementsGuide {
+        display: none !important;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes slideInDown {
+      from { transform: translateY(-60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      margin-top: 5rem;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 0 1.5rem 0;
+      font-size: 1rem;
+      opacity: 0.88;
+      background: none;
+      z-index: 10;
+      position: relative;
+      letter-spacing: 0.03em;
+    }
+    .gh-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.7em;
+      margin-bottom: 0.7em;
+    }
+    .gh-info a {
+      color: #00e676;
+      font-size: 1.2em;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .gh-info a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <nav>
+    <a href="#info" class="nav-tab active" data-target="info"><i class="bi bi-info-circle"></i> Info</a>
+    <a href="#demo" class="nav-tab" data-target="demo"><i class="bi bi-play-circle"></i> Demo</a>
+    <a href="#features" class="nav-tab" data-target="features"><i class="bi bi-stars"></i> Features</a>
+    <a href="#requirements" class="nav-tab" data-target="requirements"><i class="bi bi-clipboard-check"></i> Requirements</a>
+    <a href="#install" class="nav-tab" data-target="install"><i class="bi bi-download"></i> Install</a>
+    <a href="#disclaimer" class="nav-tab" data-target="disclaimer"><i class="bi bi-shield-exclamation"></i> Disclaimer</a>
+  </nav>
+  <header>
+    <h1><span>🥷</span> Noodle Spoof</h1>
+    <p>Free HWID Spoofer — Stylish, Fast, Undetected</p>
+    <a href="#install" class="btn" id="downloadBtn">🚀 Download Now</a>
+    </div>
+  </header>
+  <div class="container">
+    <section class="section" id="info">
+      <div class="info-block">
+        <h2><i class="bi bi-info-circle"></i> What is Noodle Spoof?</h2>
+        <p>
+          <b>Noodle Spoof</b> is a free, modern, and easy-to-use HWID spoofer for Windows. Instantly change your hardware IDs (HWIDs) to bypass bans, shadowbans, and tracking on games and software. No install, no payment, no bloat.
+        </p>
+      </div>
+      <div class="info-block">
+        <h2><i class="bi bi-lightbulb"></i> Why did I make it?</h2>
+        <p>
+          Most HWID spoofers are paid, sketchy, or full of malware. I wanted a clean, open, and free solution for gamers and privacy enthusiasts who just want to play again or get a fresh start.
+        </p>
+      </div>
+      <div class="info-block">
+        <h2><i class="bi bi-people"></i> Who is it for?</h2>
+        <ul>
+          <li>Gamers who got banned or shadowbanned</li>
+          <li>Testers and developers needing a clean HWID</li>
+          <li>Anyone who wants to reset their PC identity</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section" id="demo">
+      <div class="info-block">
+        <h2><i class="bi bi-play-circle"></i> Live Demo</h2>
+        <div class="demo-media">
+          <video src="demo.mp4" controls poster="demo-poster.png"></video>
+          <p>
+            <b>Watch:</b> Noodle Spoof in action! One EXE, one click, instant spoof.<br>
+            <small style="color:#aaa;">This video demonstrates the spoofer's UI and instant spoofing process. For safety, no sensitive HWIDs are shown.</small>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="features">
+      <div class="info-block">
+        <h2><i class="bi bi-stars"></i> Top Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-cpu"></i></span>
+            <div>
+              <b>Randomizes Hardware IDs</b>
+              <div>BIOS, Disk, MAC, UUID, and more. </div>
+            </div>
+          </div>
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-broom"></i></span>
+            <div>
+              <b>Cleans Registry & Traces</b>
+              <div>Deletes temp files and registry traces—no leftovers.</div>
+            </div>
+          </div>
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-shield-check"></i></span>
+            <div>
+              <b>Anti-Cheat Bypass</b>
+              <div>Battleye, EAC, Vanguard (limited), Activision, Faceit, and more.</div>
+            </div>
+          </div>
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-lightning-charge"></i></span>
+            <div>
+              <b>Lightning Fast</b>
+              <div>One EXE, one click. No background processes, no drivers.</div>
+            </div>
+          </div>
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-box-arrow-in-down"></i></span>
+            <div>
+              <b>Portable & Lightweight</b>
+              <div>No installation, no bloat. Download and spoof instantly.</div>
+            </div>
+          </div>
+          <div class="feature-card"><span class="feature-icon"><i class="bi bi-github"></i></span>
+            <div>
+              <b>Open Source</b>
+              <div>Code available on GitHub. Inspect, build, or contribute!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-block">
+        <h2><i class="bi bi-list-check"></i> Supported Anti-Cheats</h2>
+        <ul>
+          <li>✔ Battleye (most games)</li>
+          <li>✔ Easy Anti-Cheat (EAC)</li>
+          <li>✔ Riot Vanguard (limited, see docs)</li>
+          <li>✔ Activision/Call of Duty (tested on MW2/WZ2)</li>
+          <li>✔ Faceit (basic protection only)</li>
+          <li>✔ Apex/Fortnite/Valorant (see notes)</li>
+          <li>✔ Many more (<a href="#features">see above</a>)</li>
+        </ul>
+        <small style="color:#ff7c7c;">Note: No spoofer is 100% undetectable. Always use at your own risk.</small>
+      </div>
+    </section>
+    <section class="section" id="requirements">
+      <div class="info-block" style="padding:2.5rem 2rem 1.2rem 2rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1em;">
+          <h2 style="margin-bottom:0;display:flex;align-items:center;gap:0.5em;font-size:2rem;letter-spacing:0.02em;">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:2.5em;height:2.5em;background:var(--gradient);border-radius:50%;margin-right:0.5em;box-shadow:0 2px 16px #ff416c33;">
+              <i class="bi bi-clipboard-check" style="font-size:1.5em;color:#fff;"></i>
+            </span>
+            <span>Setup Guide &amp; Requirements</span>
+          </h2>
+          <button id="toggleReqs"
+            style="background:var(--gradient);color:#fff;font-weight:700;border:none;border-radius:18px;padding:0.5em 1.3em;cursor:pointer;font-size:1.08em;box-shadow:0 2px 12px #0004;transition:background 0.2s,box-shadow 0.2s;outline:none;display:flex;align-items:center;gap:0.5em;">
+            <i class="bi bi-eye"></i> Show Guide
+          </button>
+        </div>
+        <div id="requirementsGuide"
+          style="margin-top:1.5em;display:none;font-family:'Fira Mono','Consolas',monospace;background:#181828;color:#e0e0e0;font-size:1.01rem;white-space:pre-wrap;overflow-x:auto;border-radius:14px;padding:1.5em 1.2em;box-shadow:0 2px 24px #00e67622;">
+==============================================================================
+                  🍜 NOODLE SPOOFER - SETUP GUIDE 🍜
+==============================================================================
+
+This guide will help you properly configure your system before using the
+Noodle HWID Spoofer. Following these steps is crucial to ensure the tool
+functions correctly and to avoid potential issues.
+
+If you want peace of mind, create a Restore Point before launching the spoofer.
+------------------------------------------------------------------------------
+
+==============================================================================
+                         1. SYSTEM REQUIREMENTS
+==============================================================================
+
+- Windows 10 or Windows 11
+- Administrator privileges
+- PowerShell 5.1 or higher
+
+==============================================================================
+                        2. PRE-INSTALLATION STEPS
+==============================================================================
+
+------------------------------------------------------------------------------
+a. Right-click Setup.exe and select Run as Administrator to install prerequisites.
+b. Once completed, right-click the main application and select Run as Administrator to launch.
+------------------------------------------------------------------------------
+
+Always launch the HWID Spoofer with elevated privileges.
+
+STEPS:
+1. Right-click on "Run-Noodle-Spoofer.bat"
+2. Select "Run as administrator"
+3. Click "Yes" if prompted by User Account Control
+
+------------------------------------------------------------------------------
+b. Adjust User Account Control (Optional)
+------------------------------------------------------------------------------
+
+To reduce interruptions during use:
+
+1. Press Win+R and type: UserAccountControlSettings
+2. Press Enter
+3. Drag the slider to "Never notify" (temporarily)
+4. Click OK and restart if needed
+5. ⚠️ Restore your UAC setting afterward
+
+==============================================================================
+                  3. TOOL-SPECIFIC REQUIREMENTS
+==============================================================================
+
+------------------------------------------------------------------------------
+a. VPN Spoofing Setup
+------------------------------------------------------------------------------
+
+Ensure the following:
+
+- Ports 1194 (UDP) and 443 (TCP) are not blocked
+- No other VPN software is running
+- If OpenVPN is installed:
+  - Press Win+R → appwiz.cpl → uninstall OpenVPN if found
+
+------------------------------------------------------------------------------
+b. Hardware ID Changer (Optional)
+------------------------------------------------------------------------------
+
+If you're using this module:
+
+- Close all running applications
+- Disable Driver Signature Enforcement temporarily:
+
+  1. Hold SHIFT while clicking Restart
+  2. Go to Troubleshoot > Advanced options > Startup Settings
+  3. Click Restart
+  4. Press F7 to disable enforcement
+  5. Use the tool immediately after reboot
+
+------------------------------------------------------------------------------
+c. Disk ID Changer
+------------------------------------------------------------------------------
+
+Before proceeding:
+
+- Close apps accessing your drives
+- Back up important data
+- Do not run defrag or chkdsk while spoofing
+
+------------------------------------------------------------------------------
+d. MAC Address Spoofer
+------------------------------------------------------------------------------
+
+Important notes:
+
+- Write down your original MAC
+- Have backup network access
+- Beware of MAC filtering on school/work networks
+
+==============================================================================
+               4. COMMON ISSUES & TROUBLESHOOTING
+==============================================================================
+
+Issue: "Script execution is disabled"
+Fix:
+1. Open PowerShell as Admin
+2. Run: `Set-ExecutionPolicy Bypass -Scope CurrentUser`
+3. Confirm with `Y`
+
+Issue: "Access Denied"
+Fix:
+1. Make sure you're running as Admin
+2. Right-click file → Properties → Check "Unblock" if visible
+
+Issue: Spoofing fails on new hardware
+Fix:
+1. BIOS-level protections may block changes
+2. Use registry mode instead
+
+Issue: No internet after MAC spoof
+Fix:
+1. Use the "Reset Network" option
+2. Reboot if needed
+
+Issue: Tool is detected/blocked
+Fix:
+1. Temporarily disable antivirus:
+   - For Windows Defender:
+     → Open Windows Security
+     → Virus & threat protection → Manage settings
+     → Turn OFF real-time protection
+
+   - For 3rd-party AV:
+     → Tray icon → Right-click → Disable temporarily
+
+2. Add the tool's folder to exclusions
+
+Note: Some bundled tools like Revo Uninstaller may trigger false positives.
+
+==============================================================================
+                5. POST-SPOOFING RECOMMENDATIONS
+==============================================================================
+
+- Restore UAC settings
+- Re-enable antivirus
+- Restart your PC to finalize changes
+- Verify system/network functionality
+
+==============================================================================
+                            6. DISCLAIMER
+==============================================================================
+
+Noodle Spoofer is provided for educational and privacy research purposes.
+
+By using this tool, you agree to:
+
+- Use it responsibly and lawfully
+- Accept any and all risk
+- Acknowledge the author is not liable for damages
+
+==============================================================================
+
+Thank you for using 🥷 Noodle Spoofer. If you encounter issues not covered
+in this guide, please reach out through the official channels.
+
+==============================================================================
+        </div>
+      </div>
+    </section>
+    <section class="section" id="install">
+      <div class="info-block">
+        <h2><i class="bi bi-download"></i> Install & Usage</h2>
+        <ul>
+          <li>
+            <b>1.</b> <b>Download:</b> <a href="https://github.com/DripNoodle/noodle-spoof/releases/latest" target="_blank">Get the latest Noodle Spoof EXE</a>
+          </li>
+          <li>
+            <b>2.</b> <b>Run:</b> Double-click the EXE. You'll see a stylish UI. Click <b>"Spoof Now"</b>.
+          </li>
+          <li>
+            <b>3.</b> <b>Done!</b> All HWID traces are randomized and cleaned. Reboot for best results.
+          </li>
+        </ul>
+        <div style="margin-top:1.2em;">
+          <b>Safe Mode Tip:</b>
+          <div>For best spoofing, run in Windows Safe Mode.<br>
+            <a href="https://support.microsoft.com/en-us/windows/start-your-pc-in-safe-mode-in-windows-92c27cff-db89-8644-2170-3cae5e3e31ae" target="_blank" style="color:var(--accent);">How to boot Safe Mode</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="disclaimer">
+      <div class="info-block">
+        <h2><i class="bi bi-shield-exclamation"></i> Disclaimer</h2>
+        <p>
+          <b>Use at your own risk!</b> Noodle Spoof is provided for educational and testing purposes only. Bypassing anti-cheats may violate game Terms of Service and can lead to bans or legal issues. The developer claims no responsibility for misuse.
+        </p>
+        <ul>
+          <li>No spoofer is 100% undetectable or future-proof.</li>
+          <li>Check your local laws and game policies before use.</li>
+          <li>Open source — review or contribute on GitHub.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <footer>
+    &copy; 2025 Noodle Spoof. All rights unclaimed.<br>
+    Site made with caffeine and spite.
+  </footer>
+  <script>
+    // Particle background effect
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    let particles = [];
+    function resize() {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function Particle() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.r = 1.2 + Math.random() * 2.2;
+      this.dx = -0.3 + Math.random() * 0.6;
+      this.dy = -0.3 + Math.random() * 0.6;
+      this.alpha = 0.15 + Math.random() * 0.25;
+      this.color = Math.random() > 0.5 ? "#ff416c" : "#00e676";
+    }
+    for (let i = 0; i < 64; i++) particles.push(new Particle());
+    function draw() {
+      ctx.clearRect(0,0,w,h);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Smooth scroll and nav highlight
+    const navTabs = document.querySelectorAll(".nav-tab");
+    const sections = Array.from(document.querySelectorAll(".section"));
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    navTabs.forEach(tab => {
+      tab.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = tab.getAttribute("data-target");
+        if (target) {
+          history.replaceState(null, '', '#' + target);
+          scrollToSection(target);
+        }
+      });
+    });
+
+    // Highlight nav tab on scroll
+    function highlightNav() {
+      let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+      let offset = 120; // offset for fixed nav height
+      let activeId = 'info';
+      for (let section of sections) {
+        if (section.offsetTop - offset <= scrollPos) {
+          activeId = section.id;
+        }
+      }
+      navTabs.forEach(tab => {
+        if (tab.getAttribute('data-target') === activeId) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+    }
+    window.addEventListener('scroll', highlightNav);
+    window.addEventListener('resize', highlightNav);
+    // On load, scroll to hash if present
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash) {
+        const hash = window.location.hash.replace('#','');
+        scrollToSection(hash);
+      }
+      highlightNav();
+    });
+
+    // Download button scrolls to install section
+    document.getElementById('downloadBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      history.replaceState(null, '', '#install');
+      scrollToSection('install');
+    });
+
+    // Requirements section toggle UI (best UI)
+    const toggleReqs = document.getElementById('toggleReqs');
+    const reqGuide = document.getElementById('requirementsGuide');
+    if (toggleReqs && reqGuide) {
+      let open = false;
+      function setBtn() {
+        toggleReqs.innerHTML = open
+          ? '<i class="bi bi-eye-slash"></i> Hide Guide'
+          : '<i class="bi bi-eye"></i> Show Guide';
+      }
+      toggleReqs.addEventListener('click', function() {
+        open = !open;
+        reqGuide.style.display = open ? 'block' : 'none';
+        setBtn();
+      });
+      // Show by default on desktop, hide on mobile
+      if (window.innerWidth > 900) {
+        open = true;
+        reqGuide.style.display = 'block';
+        setBtn();
+      }
+    }
+  </script>
+</body>
+</html>
